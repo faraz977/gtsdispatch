@@ -28,9 +28,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={openSans.variable}>
-      <head>
-        <link rel="stylesheet" href="/wp-theme.css" />
-      </head>
       <body className="home page-template-default">
         <SiteHeader />
         <main id="main" className="site-main">
