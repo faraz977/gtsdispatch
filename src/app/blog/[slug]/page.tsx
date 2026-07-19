@@ -34,26 +34,11 @@ export default async function BlogPostPage({ params }: PageProps) {
   }
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
-      <Link href="/blog" className="text-sm text-sky-300 hover:text-sky-200">
+    <article className="gts-page mx-auto max-w-5xl px-4 py-12 sm:px-6">
+      <Link href="/blog" className="text-sm text-[#f47c2c] hover:underline">
         ← Back to blog
       </Link>
-      <p className="mt-4 text-xs uppercase tracking-[0.2em] text-slate-500">
-        {post.date
-          ? new Date(post.date).toLocaleDateString("en-US", {
-              month: "long",
-              day: "numeric",
-              year: "numeric",
-            })
-          : ""}
-      </p>
-      <h1
-        className="mt-3 text-4xl font-bold text-white"
-        dangerouslySetInnerHTML={{ __html: post.title }}
-      />
-      <div className="mt-8">
-        <WpContent html={post.html} />
-      </div>
-    </main>
+      <WpContent html={post.html} className="mt-6" />
+    </article>
   );
 }

@@ -1,51 +1,47 @@
 @import "tailwindcss";
 
 :root {
-  --background: #07111f;
-  --foreground: #e2e8f0;
-  --accent: #38bdf8;
+  --background: #ffffff;
+  --foreground: #111111;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
+  --font-sans: var(--font-open-sans);
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+  font-family: var(--font-open-sans), "Open Sans", Arial, Helvetica, sans-serif;
 }
 
-.wp-content h1,
-.wp-content h2,
-.wp-content h3,
-.wp-content h4 {
-  color: #f8fafc;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
-  font-weight: 700;
+.site-main {
+  min-height: 50vh;
 }
 
-.wp-content p,
-.wp-content li {
-  color: #cbd5e1;
-  line-height: 1.75;
+.gts-homepage .elementor,
+.wp-content .elementor {
+  width: 100%;
 }
 
-.wp-content a {
-  color: #7dd3fc;
-  text-decoration: underline;
-}
-
-.wp-content ul {
-  list-style: disc;
-  padding-left: 1.25rem;
+.wp-content {
+  color: inherit;
 }
 
 .wp-content img {
   max-width: 100%;
   height: auto;
-  border-radius: 0.75rem;
+}
+
+.default-logo {
+  width: auto;
+  max-height: 70px;
+  height: auto;
+}
+
+@media (max-width: 768px) {
+  .default-logo {
+    max-height: 48px;
+  }
 }

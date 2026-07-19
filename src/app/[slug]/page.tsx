@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import { WpContent } from "@/components/wp-content";
 import { getPageBySlug, getPageSlugs } from "@/lib/content";
@@ -34,17 +33,8 @@ export default async function ContentPage({ params }: PageProps) {
   }
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
-      <div className="mb-8">
-        <Link href="/" className="text-sm text-sky-300 hover:text-sky-200">
-          ← Back to home
-        </Link>
-        <h1
-          className="mt-4 text-4xl font-bold text-white"
-          dangerouslySetInnerHTML={{ __html: page.title }}
-        />
-      </div>
+    <article className="gts-page">
       <WpContent html={page.html} />
-    </main>
+    </article>
   );
 }

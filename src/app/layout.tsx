@@ -1,20 +1,21 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Open_Sans } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { site } from "@/lib/site";
 import "./globals.css";
+import "../styles/wp-home-inline.css";
 
-const inter = Inter({
+const openSans = Open_Sans({
   subsets: ["latin"],
-  variable: "--font-inter",
+  variable: "--font-open-sans",
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.domain),
   title: {
-    default: `${site.name} | ${site.tagline}`,
-    template: `%s | ${site.name}`,
+    default: "Home - Truck Dispatch Services | GTS",
+    template: "%s | GTS Dispatch",
   },
   description:
     "Professional truck dispatch services, fleet management, payroll, and compliance support for carriers across the USA.",
@@ -26,10 +27,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${inter.variable} h-full`}>
-      <body className="min-h-full bg-[#07111f] text-slate-100 antialiased">
+    <html lang="en" className={openSans.variable}>
+      <head>
+        <link rel="stylesheet" href="/wp-theme.css" />
+      </head>
+      <body className="home page-template-default">
         <SiteHeader />
-        <div className="flex-1">{children}</div>
+        <main id="main" className="site-main">
+          {children}
+        </main>
         <SiteFooter />
       </body>
     </html>

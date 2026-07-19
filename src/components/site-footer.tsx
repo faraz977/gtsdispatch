@@ -1,53 +1,61 @@
 import Link from "next/link";
-import { mainNav, site } from "@/lib/site";
+import { site, socialLinks } from "@/lib/site";
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-white/10 bg-[#05101c] text-slate-300">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-3">
-        <div>
-          <p className="text-lg font-semibold text-white">{site.name}</p>
-          <p className="mt-3 text-sm leading-7">
-            Dedicated truck dispatch and fleet support for carriers across the
-            United States since 2018.
-          </p>
-        </div>
+    <footer
+      id="footer"
+      className="ct-footer"
+      data-id="type-1"
+      itemScope
+      itemType="https://schema.org/WPFooter"
+    >
+      <div data-row="top">
+        <div className="ct-container">
+          <div data-column="widget-area-3">
+            <div className="ct-widget widget_block widget_text">
+              <p className="wp-block-paragraph">
+                <strong>
+                  Call:{" "}
+                  <a href={site.phoneHref} className="ct-menu-link">
+                    {site.phone}
+                  </a>
+                </strong>
+                <br />
+                <strong>
+                  <a href={`mailto:${site.email}`}>{site.email}</a>
+                </strong>
+                <br />
+                <strong>
+                  <Link href="/privacy-policy">Privacy Policy</Link>
+                </strong>
+              </p>
+            </div>
+          </div>
 
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-300">
-            Quick Links
-          </p>
-          <ul className="mt-4 space-y-2 text-sm">
-            {mainNav.map((item) => (
-              <li key={item.href}>
-                <Link href={item.href} className="hover:text-white">
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.2em] text-sky-300">
-            Contact
-          </p>
-          <div className="mt-4 space-y-2 text-sm">
-            <a href={site.phoneHref} className="block hover:text-white">
-              {site.phone}
-            </a>
-            <a href={`mailto:${site.email}`} className="block hover:text-white">
-              {site.email}
-            </a>
-            <Link href="/privacy-policy" className="block hover:text-white">
-              Privacy Policy
-            </Link>
+          <div data-column="socials">
+            <div className="ct-footer-socials" data-id="socials">
+              <div
+                className="ct-social-box"
+                data-icon-size="custom"
+                data-color="official"
+                data-icons-type="rounded:solid"
+              >
+                {socialLinks.map((item) => (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    aria-label={item.label}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <span className="ct-label">{item.label}</span>
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-
-      <div className="border-t border-white/10 py-6 text-center text-xs text-slate-500">
-        © {new Date().getFullYear()} {site.name}. All rights reserved.
       </div>
     </footer>
   );
