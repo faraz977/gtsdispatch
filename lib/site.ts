@@ -269,6 +269,8 @@ export const clients = [
   { src: "/images/Navix_io_Logo-scaled.jpg", alt: "Navix.io" },
   { src: "/images/KYT-logo.png", alt: "KYT logo" },
   { src: "/images/2020-11-04.jpg", alt: "FG Transport & Logistics" },
+  { name: "Elements Logistics" },
+  { name: "FNE Transport LLC" },
 ] as const;
 
 export const packages = [

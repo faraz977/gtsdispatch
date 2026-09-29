@@ -366,8 +366,22 @@ export default function HomePage() {
         <h2 className="text-center text-3xl font-semibold">The Clients We Work For</h2>
         <ul className="mt-8 grid grid-cols-2 items-center gap-6 sm:grid-cols-4">
           {clients.map((client) => (
-            <li key={client.src} className="flex h-24 items-center justify-center rounded-xl border bg-white p-4">
-              <Image src={client.src} alt={client.alt} width={180} height={80} className="max-h-16 w-auto object-contain" />
+            <li
+              key={"src" in client ? client.src : client.name}
+              className="flex h-24 items-center justify-center rounded-xl border bg-white p-4"
+            >
+              {"src" in client ? (
+                <Image src={client.src} alt={client.alt} width={180} height={80} className="max-h-16 w-auto object-contain" />
+              ) : (
+                <span className="text-center leading-tight">
+                  <span className="block text-sm font-semibold tracking-[0.12em] text-[#0563ad] uppercase">
+                    {client.name.split(" ")[0]}
+                  </span>
+                  <span className="mt-1 block text-[11px] font-medium tracking-[0.16em] text-[#231f20] uppercase">
+                    {client.name.split(" ").slice(1).join(" ")}
+                  </span>
+                </span>
+              )}
             </li>
           ))}
         </ul>
