@@ -22,7 +22,7 @@ export function WhatsAppButton({
       target="_blank"
       rel="noreferrer"
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-full bg-[#25D366] px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#1ebe5d]",
+        "inline-flex items-center justify-center gap-2 rounded-none bg-[#0e6b4f] px-4 py-2 text-sm font-semibold text-white hover:bg-[#0a5740]",
         className,
       )}
     >
@@ -39,10 +39,9 @@ export function WhatsAppFloat() {
       target="_blank"
       rel="noreferrer"
       aria-label={`WhatsApp ${company.phoneDisplay}`}
-      className="fixed right-4 bottom-4 z-50 inline-flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-emerald-900/25 hover:bg-[#1ebe5d]"
+      className="fixed right-4 bottom-4 z-50 inline-flex size-12 items-center justify-center bg-[#0e6b4f] text-white shadow-md hover:bg-[#0a5740]"
     >
-      <WhatsAppIcon className="size-5" />
-      <span className="hidden sm:inline">WhatsApp</span>
+      <WhatsAppIcon className="size-6" />
     </a>
   );
 }

@@ -30,7 +30,7 @@ export function SiteHeader() {
               {company.phoneDisplay}
             </a>
             <a
-              className="inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-2.5 py-1 font-semibold text-white hover:bg-[#1ebe5d]"
+              className="inline-flex items-center gap-1.5 bg-[#0e6b4f] px-2.5 py-1 font-semibold text-white hover:bg-[#0a5740]"
               href={company.whatsappHref}
               target="_blank"
               rel="noreferrer"
@@ -152,7 +152,7 @@ export function SiteHeader() {
                 href={company.whatsappHref}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-2 px-2 text-sm font-semibold text-[#128C7E]"
+                className="mt-2 inline-flex items-center justify-center gap-2 bg-[#0e6b4f] px-3 py-2 text-sm font-semibold text-white hover:bg-[#0a5740]"
               >
                 <WhatsAppIcon className="size-4" />
                 WhatsApp {company.phoneDisplay}

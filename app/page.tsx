@@ -58,17 +58,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-b bg-gradient-to-r from-[#e7f3ff] via-white to-[#fff6df]">
-        <ul className="mx-auto grid max-w-6xl gap-3 px-4 py-8 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
-          {highlights.map((item, index) => (
+      <section className="border-b border-[#e4e8ee] bg-[#f4f7fb]">
+        <ul className="mx-auto grid max-w-6xl gap-3 px-4 py-6 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
+          {highlights.map((item) => (
             <li
               key={item}
-              className={cn(
-                "flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium",
-                ["bg-[#0563ad] text-white", "bg-[#f6c453] text-[#3a2a00]", "bg-[#25D366] text-[#06381a]", "bg-[#7c3aed] text-white"][index % 4],
-              )}
+              className="flex items-center gap-3 border border-[#d7dee7] bg-white px-4 py-3 text-sm font-medium text-[#231f20]"
             >
-              <Check className="size-4 shrink-0" />
+              <span className="grid size-5 shrink-0 place-items-center bg-[#0563ad] text-white">
+                <Check className="size-3.5" strokeWidth={2.5} />
+              </span>
               {item}
             </li>
           ))}
