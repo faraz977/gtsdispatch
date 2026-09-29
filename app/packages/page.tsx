@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ClientVideos } from "@/components/client-videos";
 import { packages, testimonials } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -27,9 +26,6 @@ export default function PackagesPage() {
         ))}
       </div>
       <h2 className="mt-16 text-3xl font-semibold">What our clients say about us</h2>
-      <div className="mt-6">
-        <ClientVideos />
-      </div>
       <div className="mt-6 grid gap-6 lg:grid-cols-3">
         {testimonials.map((item) => (
           <figure key={item.name} className="rounded-2xl border p-5">

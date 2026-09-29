@@ -45,7 +45,6 @@ export const nav: NavItem[] = [
   { label: "About", href: "/about" },
   { label: "Our Services", href: "/our-services", children: [...serviceLinks] },
   { label: "How we work", href: "/how-we-work" },
-  { label: "Videos", href: "/videos" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
@@ -171,11 +170,13 @@ export const pillars = [
 export const clientVideos = [
   {
     id: "dTT2XmY7A3w",
+    label: "Owner-operator review",
     title: "Truck Dispatch Services USA | GTS Truck Dispatch | Owner Operator / Review",
     url: "https://www.youtube.com/watch?v=dTT2XmY7A3w",
   },
   {
     id: "3JPEnGyDFwE",
+    label: "Small fleet review",
     title:
       "Truck Dispatch Services USA | GTS Truck Dispatch | Owner Operator / Small Truck Company | Reviews",
     url: "https://www.youtube.com/watch?v=3JPEnGyDFwE",
