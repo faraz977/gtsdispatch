@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Check } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
 import { ClientVideos } from "@/components/client-videos";
+import { WhatsAppButton } from "@/components/whatsapp-link";
 import { PostTruckForm } from "@/components/forms";
 import { posts } from "@/lib/blog";
 import {
@@ -52,15 +53,22 @@ export default function HomePage() {
             <a href={company.phoneHref} className={cn(buttonVariants({ variant: "outline" }), "h-11 border-white/40 bg-transparent px-5 text-white hover:bg-white/10")}>
               {company.phoneDisplay}
             </a>
+            <WhatsAppButton className="h-11 px-5" label="WhatsApp" />
           </div>
         </div>
       </section>
 
-      <section className="border-b bg-[#f4f5f6]">
+      <section className="border-b bg-gradient-to-r from-[#e7f3ff] via-white to-[#fff6df]">
         <ul className="mx-auto grid max-w-6xl gap-3 px-4 py-8 sm:grid-cols-2 sm:px-6 lg:grid-cols-4">
-          {highlights.map((item) => (
-            <li key={item} className="flex items-center gap-2 text-sm font-medium">
-              <Check className="size-4 shrink-0 text-[#0563ad]" />
+          {highlights.map((item, index) => (
+            <li
+              key={item}
+              className={cn(
+                "flex items-center gap-2 rounded-full px-3 py-2 text-sm font-medium",
+                ["bg-[#0563ad] text-white", "bg-[#f6c453] text-[#3a2a00]", "bg-[#25D366] text-[#06381a]", "bg-[#7c3aed] text-white"][index % 4],
+              )}
+            >
+              <Check className="size-4 shrink-0" />
               {item}
             </li>
           ))}
@@ -201,16 +209,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-[#f4f5f6] py-16">
+      <section className="bg-gradient-to-b from-[#eef6ff] to-[#f7f3ea] py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <h2 className="text-3xl font-semibold">Our services</h2>
           <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {homeServices.map((service) => (
+            {homeServices.map((service, index) => (
               <Link
                 key={service.title}
                 href={service.href}
                 className="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5"
               >
+                <div
+                  className="h-1.5"
+                  style={{ background: ["#0563ad", "#f6c453", "#25D366", "#7c3aed", "#0284c7", "#e11d48", "#0f766e"][index % 7] }}
+                />
                 <div className="relative aspect-[16/9] bg-[#f4f5f6]">
                   <Image
                     src={service.image}
@@ -362,17 +374,20 @@ export default function HomePage() {
         </ul>
       </section>
 
-      <section className="bg-[#f4f5f6]">
+      <section className="bg-gradient-to-r from-[#0563ad] to-[#0e9f6e] text-white">
         <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-4 py-14 sm:px-6 md:flex-row md:items-center">
           <div>
             <h2 className="text-3xl font-semibold">Get In Touch</h2>
-            <p className="mt-2 max-w-xl text-[#3a3d40]">
-              Do you have a question or do you want to work with us? Feel free to get in touch.
+            <p className="mt-2 max-w-xl text-white/90">
+              Call or message {company.phoneDisplay} on WhatsApp. A dispatcher can talk through lanes, home time, and the right package.
             </p>
           </div>
-          <Link href="/contact" className={cn(buttonVariants(), "h-11 px-5")}>
-            Contact Us
-          </Link>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <Link href="/contact" className={cn(buttonVariants(), "h-11 bg-white px-5 text-[#0563ad] hover:bg-white/90")}>
+              Contact Us
+            </Link>
+            <WhatsAppButton className="h-11 px-5" label="WhatsApp" />
+          </div>
         </div>
       </section>
     </>

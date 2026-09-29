@@ -12,6 +12,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { WhatsAppIcon } from "@/components/whatsapp-link";
 import { company, nav } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -20,14 +21,27 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b border-black/5 bg-white/95 backdrop-blur">
-      <div className="bg-[#0563ad] text-white">
+      <div className="bg-gradient-to-r from-[#043e73] via-[#0563ad] to-[#1280d4] text-white">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-2 text-xs sm:text-sm">
           <p>Driver support 24/7 · Remote dispatch across the U.S.</p>
-          <a className="font-medium hover:underline" href={company.phoneHref}>
-            {company.phoneDisplay}
-          </a>
+          <div className="flex items-center gap-3">
+            <a className="inline-flex items-center gap-1.5 font-medium hover:underline" href={company.phoneHref}>
+              <Phone className="size-3.5" />
+              {company.phoneDisplay}
+            </a>
+            <a
+              className="inline-flex items-center gap-1.5 rounded-full bg-[#25D366] px-2.5 py-1 font-semibold text-white hover:bg-[#1ebe5d]"
+              href={company.whatsappHref}
+              target="_blank"
+              rel="noreferrer"
+            >
+              <WhatsAppIcon className="size-3.5" />
+              WhatsApp
+            </a>
+          </div>
         </div>
       </div>
+      <div className="h-1 bg-gradient-to-r from-[#f6c453] via-[#25D366] to-[#7c3aed]" />
       <div className="mx-auto flex h-[4.5rem] max-w-6xl items-center gap-4 px-4">
         <Link href="/" className="shrink-0" aria-label="GTS Dispatch home">
           <Image
@@ -133,6 +147,15 @@ export function SiteHeader() {
               >
                 <Phone className="size-4" />
                 {company.phoneDisplay}
+              </a>
+              <a
+                href={company.whatsappHref}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-2 text-sm font-semibold text-[#128C7E]"
+              >
+                <WhatsAppIcon className="size-4" />
+                WhatsApp {company.phoneDisplay}
               </a>
               <a
                 href={company.portal}

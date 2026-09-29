@@ -4,7 +4,8 @@ import { company, serviceLinks, socials } from "@/lib/site";
 
 export function SiteFooter() {
   return (
-    <footer className="bg-[#231f20] text-white">
+    <footer className="bg-[#1b2430] text-white">
+      <div className="h-1.5 bg-gradient-to-r from-[#0563ad] via-[#25D366] to-[#f6c453]" />
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <Image
@@ -84,6 +85,11 @@ export function SiteFooter() {
             <li>
               <a className="hover:text-white" href={company.phoneHref}>
                 Call: {company.phoneDisplay}
+              </a>
+            </li>
+            <li>
+              <a className="font-semibold text-[#25D366] hover:text-white" href={company.whatsappHref} target="_blank" rel="noreferrer">
+                WhatsApp: {company.phoneDisplay}
               </a>
             </li>
             <li>

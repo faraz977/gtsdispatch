@@ -3,6 +3,7 @@ export const company = {
   legal: "Goodlanes Transportation Services LLC",
   phoneDisplay: "(832) 699-0420",
   phoneHref: "tel:+18326990420",
+  whatsappHref: "https://wa.me/18326990420",
   email: "Support@GTSDispatch.us",
   emailHref: "mailto:Support@GTSDispatch.us",
   address: "300 N Gould St, Sheridan, WY 82801",
@@ -15,6 +16,7 @@ export const company = {
 } as const;
 
 export const socials = [
+  { label: "WhatsApp", href: "https://wa.me/18326990420" },
   { label: "Facebook", href: "https://web.facebook.com/gtsdispatch/" },
   { label: "YouTube", href: "https://www.youtube.com/@GTSTruckDispatch" },
   { label: "Instagram", href: "https://www.instagram.com/gtsdispatch/" },

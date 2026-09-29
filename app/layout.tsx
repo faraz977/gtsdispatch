@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Open_Sans, Raleway } from "next/font/google";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { WhatsAppFloat } from "@/components/whatsapp-link";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -26,10 +27,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en" className={`${openSans.variable} ${raleway.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col bg-white text-[#231f20]">
+      <body className="flex min-h-full flex-col bg-[#f4f7fb] text-[#231f20]">
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
+        <WhatsAppFloat />
       </body>
     </html>
   );
