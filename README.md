@@ -1,53 +1,28 @@
 # GTS Dispatch
 
-Next.js site for [gtsdispatch.us](https://gtsdispatch.us), migrated from WordPress for deployment on Vercel.
+Marketing site for [GTS Dispatch](https://gtsdispatch.us), the truck dispatch company operated by Goodlanes Transportation Services LLC. The live site was unavailable, so this rebuild follows the latest public archive: pages, copy, logo, service photos, equipment art, client marks, and package cards.
 
-## Stack
-
-- Next.js 16 (App Router)
-- React 19
-- Tailwind CSS 4
-- Static content exported from WordPress REST API
-
-## Local development
+## Run locally
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
-
-## Refresh WordPress content
-
-While WordPress is still live, you can re-export pages and posts:
+The dev server uses port **3847**:
 
 ```bash
-npm run migrate:wp
+npm run dev -- --port 3847
 ```
 
-This updates:
+Then open [http://127.0.0.1:3847](http://127.0.0.1:3847).
 
-- `src/content/pages.json`
-- `src/content/posts.json`
+## What’s included
 
-## Deploy to Vercel
+- Home, about, services, fleet, semi, box truck, IFTA, recruiting, payroll, equipment, how we work, packages, FAQ, blog, contact, post-your-truck, and privacy policy
+- Contact and post-your-truck forms with validation
+- Photos recovered from the archived WordPress media library in `public/images`
 
-1. Push this repo to GitHub
-2. Import the repo in [Vercel](https://vercel.com/new)
-3. Deploy with default Next.js settings
-4. Add your custom domain `gtsdispatch.us`
-5. Point DNS from Hostinger to Vercel
+Forms confirm on the page. They do not email GTS. Call **(832) 699-0420** or write **Support@GTSDispatch.us** to reach the dispatch desk. The client portal remains at [portal.gtsdispatch.us](https://portal.gtsdispatch.us).
 
-## Project structure
-
-- `src/app/` — routes and pages
-- `src/components/` — shared UI
-- `src/content/` — exported WordPress content
-- `scripts/migrate-wp.mjs` — WordPress export script
-
-## Notes
-
-- WooCommerce pages (`checkout`, `my-account`) redirect to `/contact`
-- The homepage uses a custom React layout inspired by a startup landing theme
-- Inner pages render migrated WordPress HTML content
+A few newer hero files from 2025–2026 were referenced on the archived homepage but were never captured by the archive. Those spots use the closest archived truck, highway, and driver photos.
