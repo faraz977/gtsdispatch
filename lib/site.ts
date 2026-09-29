@@ -71,20 +71,26 @@ export const equipment = [
   {
     title: "Dry Van",
     href: "/equipement-expertise",
-    image: "/images/Wdry.png",
+    image: "/images/dry-van.jpg",
     text: "Our strength lies in efficiently coordinating dry van operations, ensuring on-time deliveries of various cargo types while prioritizing safety and security.",
   },
   {
     title: "Flatbed / Specialized Eqp",
     href: "/equipement-expertise",
-    image: "/images/WFlatbedicon.png",
+    image: "/images/flatbed.jpg",
     text: "Flatbeds handle diverse cargo, while specialized equipment, like Lowboy, Stepdeck, Double Drop, RGN, Conestoga, and Side Kit trailers, offer tailored solutions for unique cargo challenges.",
   },
   {
     title: "Reefer",
     href: "/equipement-expertise",
-    image: "/images/Wreefericon.png",
+    image: "/images/reefer.jpg",
     text: "We excel in reefer dispatch, with expertise in maintaining precise temperature control for perishable cargo, ensuring the integrity and freshness of goods throughout transit.",
+  },
+  {
+    title: "Power Only",
+    href: "/equipement-expertise",
+    image: "/images/power-only.png",
+    text: "Power-only dispatch keeps the tractor moving under someone else’s trailer, with lanes chosen so the next hook is close and the week stays paid.",
   },
 ] as const;
 
@@ -92,7 +98,7 @@ export const homeServices = [
   {
     title: "Fleet Management",
     href: "/fleet-management",
-    image: "/images/FMS-scaled.jpg",
+    image: "/images/service-1.jpg",
     text: "Our fleet management services ensure efficient vehicle operations by coordinating maintenance, monitoring compliance, and optimizing costs. This service goes beyond basic truck dispatch to support long term operational excellence.",
   },
   {
@@ -104,13 +110,14 @@ export const homeServices = [
   {
     title: "Independent Freight Agents",
     href: "/our-services",
-    image: "/images/Freight-Agent-Services.webp",
+    image: "/images/service-2.jpg",
     text: "As Independent Freight Agents, we act on behalf of freight brokers by managing carrier coordination, dispatch execution, and operational support through our experienced global team.",
   },
   {
     title: "Box Truck Dispatch",
     href: "/box-truck-dispatch",
     image: "/images/boxtruck.webp",
+    fit: "contain",
     text: "Our box truck dispatch services streamline cargo transportation by providing accurate route planning, steady load flow, and reliable daily dispatch operations.",
   },
   {
@@ -129,6 +136,7 @@ export const homeServices = [
     title: "IFTA Filing",
     href: "/ifta-filing",
     image: "/images/IFTA.jpg",
+    fit: "contain",
     text: "We manage quarterly and monthly tax filings including IFTA fuel reporting, as well as state mileage and weight distance filings such as New Mexico, Oregon, Kentucky, and New York HUT, ensuring accurate reporting and multi state compliance.",
   },
 ] as const;
@@ -253,12 +261,12 @@ export const testimonials = [
 export const clients = [
   { src: "/images/DAUniverlogistics-logo.png", alt: "D&A Univerlogistics logo" },
   { src: "/images/JDR-logo.png", alt: "JDR logo" },
-  { src: "/images/gallery_item1.png", alt: "gallery_item1" },
-  { src: "/images/Logo.png", alt: "Logo" },
+  { src: "/images/gallery_item1.png", alt: "Z Transport" },
+  { src: "/images/Logo.png", alt: "Transport Systems, LLC" },
   { src: "/images/OTR-Express-Logo.png", alt: "OTR Express logo" },
   { src: "/images/Navix_io_Logo-scaled.jpg", alt: "Navix.io" },
   { src: "/images/KYT-logo.png", alt: "KYT logo" },
-  { src: "/images/2020-11-04.jpg", alt: "2020-11-04" },
+  { src: "/images/2020-11-04.jpg", alt: "FG Transport & Logistics" },
 ] as const;
 
 export const packages = [
@@ -271,6 +279,11 @@ export const packages = [
     title: "Complete Fleet Management",
     image: "/images/Package-B.png",
     alt: "Complete fleet management at 5 percent, including dispatch, safety and compliance, driver training and recruiting, trip and settlement management, and maintenance support",
+  },
+  {
+    title: "Trip and Settlement Management",
+    image: "/images/Package-C.png",
+    alt: "Trip and settlement management at 50 dollars per truck, including trip sheets, weekly driver settlements, company-truck settlements, and fuel, maintenance, toll, and permit costs",
   },
   {
     title: "Freight Dispatch Service",

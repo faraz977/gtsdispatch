@@ -68,6 +68,28 @@ export default function HomePage() {
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-sm font-semibold tracking-[0.16em] text-[#0563ad] uppercase">Pricing</p>
+            <h2 className="mt-2 text-3xl font-semibold">Packages</h2>
+            <p className="mt-3 max-w-2xl text-[#3a3d40]">
+              Dispatch is 4% of gross. Fleet management and freight dispatch are 5%. Trip and settlement sheets are $50 a truck.
+            </p>
+          </div>
+          <Link href="/packages" className="text-sm font-semibold text-[#0563ad]">
+            View packages
+          </Link>
+        </div>
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+          {packages.map((item) => (
+            <Link key={item.title} href="/contact" className="block transition hover:-translate-y-1">
+              <Image src={item.image} alt={item.alt} width={640} height={900} className="h-auto w-full" />
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <h2 className="text-3xl font-semibold">Dispatch, fleet, payroll, and freight agents</h2>
         <div className="mt-8 grid gap-4 md:grid-cols-2">
           {serviceLines.map((line) => (
@@ -109,10 +131,10 @@ export default function HomePage() {
         </div>
         <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
           <Image
-            src="/images/Wdry.png"
-            alt="GTS dry van"
+            src="/images/reefer.jpg"
+            alt="Blue tractor with reefer trailers"
             fill
-            className="object-contain bg-[#f4f5f6] p-6"
+            className="object-cover"
           />
         </div>
       </section>
@@ -157,8 +179,8 @@ export default function HomePage() {
           </div>
           <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
             <Image
-              src="/images/truck-dispatcher-1.jpeg"
-              alt="Dispatcher at work"
+              src="/images/Freight-Agent-Services.webp"
+              alt="Dispatcher on a headset at the GTS desk"
               fill
               className="object-cover"
             />
@@ -182,19 +204,23 @@ export default function HomePage() {
       <section className="bg-[#f4f5f6] py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <h2 className="text-3xl font-semibold">Our services</h2>
-          <div className="mt-8 grid gap-6 md:grid-cols-2">
+          <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
             {homeServices.map((service) => (
               <Link
                 key={service.title}
                 href={service.href}
                 className="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5"
               >
-                <div className="relative aspect-[16/9]">
+                <div className="relative aspect-[16/9] bg-[#f4f5f6]">
                   <Image
                     src={service.image}
                     alt=""
                     fill
-                    className="object-cover transition duration-300 group-hover:scale-[1.03]"
+                    className={
+                      "fit" in service && service.fit === "contain"
+                        ? "object-contain p-4"
+                        : "object-cover transition duration-300 group-hover:scale-[1.03]"
+                    }
                   />
                 </div>
                 <div className="p-5">
@@ -209,14 +235,14 @@ export default function HomePage() {
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
         <h2 className="text-3xl font-semibold">Equipment we dispatch</h2>
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
+        <div className="mt-8 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {equipment.map((item) => (
-            <Link key={item.title} href={item.href} className="rounded-2xl border p-4 hover:border-[#0563ad]">
+            <Link key={item.title} href={item.href} className="overflow-hidden rounded-2xl border hover:border-[#0563ad]">
               <div className="relative aspect-[16/10]">
-                <Image src={item.image} alt="" fill className="object-contain" />
+                <Image src={item.image} alt="" fill className="object-cover" />
               </div>
-              <h3 className="mt-3 text-xl font-semibold">{item.title}</h3>
-              <p className="mt-2 text-sm leading-6 text-[#5c6166]">{item.text}</p>
+              <h3 className="mt-4 px-4 text-xl font-semibold">{item.title}</h3>
+              <p className="mt-2 px-4 pb-5 text-sm leading-6 text-[#5c6166]">{item.text}</p>
             </Link>
           ))}
         </div>
@@ -297,22 +323,6 @@ export default function HomePage() {
               </figure>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <div className="flex items-end justify-between gap-4">
-          <h2 className="text-3xl font-semibold">Packages</h2>
-          <Link href="/packages" className="text-sm font-semibold text-[#0563ad]">
-            View packages
-          </Link>
-        </div>
-        <div className="mt-8 grid gap-6 md:grid-cols-3">
-          {packages.map((item) => (
-            <Link key={item.title} href="/contact" className="block">
-              <Image src={item.image} alt={item.alt} width={640} height={900} className="h-auto w-full" />
-            </Link>
-          ))}
         </div>
       </section>
 

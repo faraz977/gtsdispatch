@@ -6,7 +6,7 @@ import { packages, testimonials } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Packages",
   description:
-    "GTS dispatch at 4% of gross, and fleet management or freight dispatch at 5%.",
+    "GTS dispatch at 4% of gross, fleet or freight dispatch at 5%, and trip settlements at $50 a truck.",
 };
 
 export default function PackagesPage() {
@@ -16,9 +16,9 @@ export default function PackagesPage() {
       <h1 className="mt-2 text-4xl font-semibold">Packages</h1>
       <p className="mt-4 max-w-2xl leading-7 text-[#3a3d40]">
         Truck dispatch is 4% of the gross on loads booked through GTS. Complete fleet
-        management and freight dispatch are 5%. Choose a card and tell us about the fleet.
+        management and freight dispatch are 5%. Trip and settlement sheets are $50 a truck.
       </p>
-      <div className="mt-10 grid gap-6 md:grid-cols-3">
+      <div className="mt-10 grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
         {packages.map((item) => (
           <Link key={item.title} href="/contact" className="block rounded-2xl transition hover:-translate-y-1">
             <Image src={item.image} alt={item.alt} width={720} height={1000} className="h-auto w-full" />

@@ -59,8 +59,8 @@ export const servicesPage: PageDoc = {
   eyebrow: "What we handle",
   description:
     "A full suite of dispatch, fleet, payroll, recruiting, and IFTA services for carriers and independent owner-operators.",
-  image: "/images/truck-dispatcher-1.jpeg",
-  imageAlt: "Dispatcher coordinating freight",
+  image: "/images/service-2.jpg",
+  imageAlt: "White tractor hooked to a trailer",
   blocks: [
     {
       type: "p",
@@ -108,8 +108,8 @@ export const fleetPage: PageDoc = {
   eyebrow: "Beyond dispatch",
   description:
     "Comprehensive fleet management that covers back-office work, compliance, safety, tracking, and driver pay support.",
-  image: "/images/FMS-scaled.jpg",
-  imageAlt: "Fleet of trucks managed by GTS",
+  image: "/images/service-1.jpg",
+  imageAlt: "Dry van trailers staged at a warehouse",
   blocks: [
     {
       type: "p",
@@ -354,8 +354,8 @@ export const equipmentPage: PageDoc = {
   eyebrow: "Every trailer type",
   description:
     "Dispatch built around dry van, reefer, flatbed, and specialized trailers including lowboy, stepdeck, RGN, conestoga, and side kit.",
-  image: "/images/Wdry.png",
-  imageAlt: "GTS dry van illustration",
+  image: "/images/service-3.jpg",
+  imageAlt: "Flatbed hauling specialized freight",
   blocks: [
     { type: "h2", text: "Dry Vans" },
     {
