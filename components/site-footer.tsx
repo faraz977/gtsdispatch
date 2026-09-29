@@ -120,7 +120,9 @@ export function SiteFooter() {
       </div>
       <div className="border-t border-white/10">
         <p className="mx-auto max-w-6xl px-4 py-4 text-xs text-white/60 sm:px-6">
-          Copyright © {company.legal} 2023-26. All rights reserved.
+          Copyright © {company.legal} 2023-26. All rights reserved. Truck photos by
+          Quintin Gellar on Pexels, and “Colorful Semi-Trucks” by Thank You (21
+          Millions+) views, CC BY 2.0, via Wikimedia Commons.
         </p>
       </div>
     </footer>

@@ -25,8 +25,8 @@ export default function HomePage() {
     <>
       <section className="relative isolate min-h-[34rem] overflow-hidden bg-[#231f20] text-white">
         <Image
-          src="/images/dry-van.jpg"
-          alt="Dry van semi truck on the highway"
+          src="/images/services-banner.jpg"
+          alt="White semi trucks on a mountain highway"
           fill
           priority
           className="object-cover"
@@ -139,8 +139,8 @@ export default function HomePage() {
         </div>
         <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
           <Image
-            src="/images/reefer.jpg"
-            alt="Blue tractor with reefer trailers"
+            src="/images/fleet-lineup.jpg"
+            alt="A row of colorful semi trucks staged for dispatch"
             fill
             className="object-cover"
           />
@@ -262,7 +262,7 @@ export default function HomePage() {
 
       <section className="relative isolate overflow-hidden bg-[#231f20] text-white">
         <Image
-          src="/images/pexels-pixabay-315938-scaled.jpg"
+          src="/images/mountain-highway.jpg"
           alt=""
           fill
           className="object-cover opacity-40"
