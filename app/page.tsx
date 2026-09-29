@@ -155,7 +155,7 @@ export default function HomePage() {
               that fits your schedule. No forced dispatch.
             </p>
           </div>
-          <div className="rounded-2xl bg-white/10 p-4 sm:p-6">
+          <div className="rounded-2xl bg-white p-4 text-[#231f20] sm:p-6">
             <PostTruckForm />
           </div>
         </div>

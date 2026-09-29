@@ -14,9 +14,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { equipmentTypes, states } from "@/lib/site";
+import { company, equipmentTypes, states } from "@/lib/site";
 
-const fieldClass = "h-10 bg-white";
+const fieldClass =
+  "h-10 bg-white text-[#231f20] caret-[#231f20] placeholder:text-[#667085] [color-scheme:light]";
 
 function RequiredLabel({ children }: { children: string }) {
   return (
@@ -48,7 +49,7 @@ function Choice({
         value={value || null}
         onValueChange={(next) => onChange(next ?? "")}
       >
-        <SelectTrigger className="h-10 w-full bg-white">
+        <SelectTrigger className="h-10 w-full bg-white text-[#231f20] data-placeholder:text-[#667085]">
           <SelectValue placeholder={placeholder} />
         </SelectTrigger>
         <SelectContent>
@@ -63,7 +64,14 @@ function Choice({
   );
 }
 
-const FORM_ENDPOINT = "https://formsubmit.co/Support@GTSDispatch.us";
+const FORM_ENDPOINT = `https://formsubmit.co/${company.email}`;
+
+function setReturnUrl(form: HTMLFormElement, path: string) {
+  const next = form.elements.namedItem("_next");
+  if (next instanceof HTMLInputElement) {
+    next.value = `${window.location.origin}${path}?sent=1`;
+  }
+}
 
 function SentNotice({ className, children }: { className: string; children: string }) {
   const params = useSearchParams();
@@ -73,13 +81,6 @@ function SentNotice({ className, children }: { className: string; children: stri
       {children}
     </p>
   );
-}
-
-function setReturnUrl(form: HTMLFormElement, path: string) {
-  const next = form.elements.namedItem("_next");
-  if (next instanceof HTMLInputElement) {
-    next.value = `${window.location.origin}${path}?sent=1`;
-  }
 }
 
 function formOf(event: { currentTarget: EventTarget | null; target: EventTarget | null }) {
@@ -123,7 +124,7 @@ export function ContactForm() {
       action={FORM_ENDPOINT}
       method="POST"
       onSubmit={onSubmit}
-      className="space-y-4 rounded-2xl border bg-white p-5 shadow-sm sm:p-6"
+      className="space-y-4 rounded-2xl border bg-white p-5 text-[#231f20] shadow-sm sm:p-6"
     >
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
@@ -161,7 +162,7 @@ export function ContactForm() {
       </div>
       <div className="space-y-1.5">
         <Label>Message</Label>
-        <Textarea name="Message" className="min-h-28 bg-white" />
+        <Textarea name="Message" className="min-h-28 bg-white text-[#231f20] caret-[#231f20]" />
       </div>
       {error ? (
         <p className="text-sm text-red-700" role="alert">
@@ -178,22 +179,13 @@ export function ContactForm() {
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_next" value="https://gtsdispatch.us/contact?sent=1" />
-      <Button
-        type="submit"
-        className="h-10 px-5"
-        disabled={pending}
-        onClick={(event) => {
-          const form = formOf(event);
-          if (!form) return;
-          const problem = contactProblem(form);
-          if (!problem) return;
-          event.preventDefault();
-          setError(problem);
-          setPending(false);
-        }}
-      >
+      <Button type="submit" className="h-10 px-5" disabled={pending}>
         {pending ? "Sending…" : "Send message"}
       </Button>
+      <p className="text-xs leading-5 text-[#5c6166]">
+        The first message sends an activation email to {company.email}. Open it, click Activate, then submit again.
+        After that, this form delivers straight to the desk. You can also call or WhatsApp {company.phoneDisplay}.
+      </p>
     </form>
   );
 }
@@ -207,7 +199,8 @@ export function PostTruckForm({ returnPath = "/" }: { returnPath?: string }) {
   const [agreed, setAgreed] = useState(false);
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const form = event.target instanceof HTMLFormElement ? event.target : event.currentTarget;
+    const form = formOf(event);
+    if (!form) return;
     const data = new FormData(form);
     const origin = String(data.get("Origin city") || "").trim();
     const date = String(data.get("Date") || "").trim();
@@ -226,7 +219,7 @@ export function PostTruckForm({ returnPath = "/" }: { returnPath?: string }) {
   }
 
   return (
-    <form action={FORM_ENDPOINT} method="POST" onSubmit={onSubmit} className="space-y-5">
+    <form action={FORM_ENDPOINT} method="POST" onSubmit={onSubmit} className="space-y-5 text-[#231f20]">
       <div className="grid gap-4 sm:grid-cols-3">
         <div className="space-y-1.5">
           <RequiredLabel>Origin (City)</RequiredLabel>
@@ -308,7 +301,7 @@ export function PostTruckForm({ returnPath = "/" }: { returnPath?: string }) {
         </p>
       ) : null}
       <Suspense fallback={null}>
-        <SentNotice className="rounded-lg bg-white px-3 py-2 text-sm text-[#0563ad]">
+        <SentNotice className="rounded-lg bg-[#e8f1f8] px-3 py-2 text-sm text-[#0563ad]">
           Truck posted. Dispatch will follow up at the phone or email you entered.
         </SentNotice>
       </Suspense>
@@ -321,9 +314,12 @@ export function PostTruckForm({ returnPath = "/" }: { returnPath?: string }) {
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_next" value={`https://gtsdispatch.us${returnPath}?sent=1`} />
-      <Button type="submit" variant="secondary" className="h-10 bg-white px-5 text-[#0563ad] hover:bg-white/90" disabled={pending}>
+      <Button type="submit" className="h-10 px-5" disabled={pending}>
         {pending ? "Sending…" : "Load Offers"}
       </Button>
+      <p className="text-xs leading-5 text-[#5c6166]">
+        The first post sends an activation email to {company.email}. Open it, click Activate, then submit again.
+      </p>
     </form>
   );
 }
