@@ -167,6 +167,63 @@ export const pillars = [
   },
 ] as const;
 
+export const clientVideos = [
+  {
+    id: "dTT2XmY7A3w",
+    title: "Truck Dispatch Services USA | GTS Truck Dispatch | Owner Operator / Review",
+    url: "https://www.youtube.com/watch?v=dTT2XmY7A3w",
+  },
+  {
+    id: "3JPEnGyDFwE",
+    title:
+      "Truck Dispatch Services USA | GTS Truck Dispatch | Owner Operator / Small Truck Company | Reviews",
+    url: "https://www.youtube.com/watch?v=3JPEnGyDFwE",
+  },
+] as const;
+
+export const serviceLines = [
+  {
+    title: "Truck Dispatch Service",
+    items: [
+      "Load sourcing and booking based on lane preference",
+      "Rate negotiation with brokers and shippers",
+      "24/7 dispatch communication and load tracking",
+      "Broker setup, carrier packets, and onboarding",
+      "Paperwork handling including BOL and invoicing",
+    ],
+  },
+  {
+    title: "Complete Fleet Management",
+    items: [
+      "Everything included in truck dispatch services",
+      "Safety and FMCSA compliance oversight (HOS focused)",
+      "Driver compliance training for ELD and Hours of Service",
+      "Trip planning, settlements, and payroll coordination",
+      "Maintenance reminders and breakdown assistance",
+    ],
+  },
+  {
+    title: "Trip & Payroll Management",
+    items: [
+      "Detailed trip sheets with pickup and delivery records",
+      "Weekly driver settlement and deduction summaries",
+      "Company truck payroll and owner operator settlements",
+      "Fuel, tolls, maintenance, and expense calculations",
+      "Clear reporting for profit and cost visibility",
+    ],
+  },
+  {
+    title: "Freight Agent Solutions",
+    items: [
+      "Dedicated freight agents managing broker accounts",
+      "Globally trained operations and support team",
+      "24/7 freight coverage and dispatch coordination",
+      "Strong network with shippers and carriers",
+      "Over 8 years of industry experience",
+    ],
+  },
+] as const;
+
 export const testimonials = [
   {
     name: "Sarah M.",

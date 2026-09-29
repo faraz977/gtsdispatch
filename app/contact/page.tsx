@@ -26,6 +26,13 @@ export default function ContactPage() {
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1fr_0.85fr]">
         <ContactForm />
         <div className="space-y-6">
+          <iframe
+            title="GTS Truck Dispatch, 30 N Gould St, Sheridan, WY 82801, United States"
+            src="https://maps.google.com/maps?q=GTS%20Truck%20Dispatch%2C%2030%20N%20Gould%20St%2C%20Sheridan%2C%20WY%2082801%2C%20United%20States&t=m&z=18&output=embed&iwloc=near"
+            className="h-64 w-full rounded-2xl border-0"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
           <div className="rounded-2xl bg-[#f4f5f6] p-6">
             <h2 className="text-xl font-semibold">Get in touch</h2>
             <p className="mt-3 text-sm leading-6">{company.address}</p>

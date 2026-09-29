@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Check } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
+import { ClientVideos } from "@/components/client-videos";
 import { PostTruckForm } from "@/components/forms";
 import { posts } from "@/lib/blog";
 import {
@@ -13,6 +14,7 @@ import {
   packages,
   pillars,
   semiPoints,
+  serviceLines,
   testimonials,
 } from "@/lib/site";
 import { cn } from "@/lib/utils";
@@ -63,6 +65,22 @@ export default function HomePage() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <h2 className="text-3xl font-semibold">Dispatch, fleet, payroll, and freight agents</h2>
+        <div className="mt-8 grid gap-4 md:grid-cols-2">
+          {serviceLines.map((line) => (
+            <div key={line.title} className="rounded-2xl border bg-white p-5">
+              <h3 className="text-lg font-semibold text-[#0563ad]">{line.title}</h3>
+              <ul className="mt-3 space-y-2 text-sm leading-6 text-[#3a3d40]">
+                {line.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
       </section>
 
       <section className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2">
@@ -256,6 +274,9 @@ export default function HomePage() {
       <section className="bg-[#f4f5f6] py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <h2 className="text-3xl font-semibold">What OUR CLIENTS Say About Us</h2>
+          <div className="mt-8">
+            <ClientVideos />
+          </div>
           <div className="mt-8 grid gap-6 lg:grid-cols-3">
             {testimonials.map((item) => (
               <figure key={item.name} className="rounded-2xl bg-white p-5 shadow-sm">
