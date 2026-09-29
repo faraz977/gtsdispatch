@@ -22,8 +22,8 @@ export default function HomePage() {
     <>
       <section className="relative isolate min-h-[34rem] overflow-hidden bg-[#231f20] text-white">
         <Image
-          src="/images/Semi-Truck-Dispatch-Services.jpg"
-          alt="Semi trucks ready for dispatch"
+          src="/images/dry-van.jpg"
+          alt="Dry van semi truck on the highway"
           fill
           priority
           className="object-cover"
