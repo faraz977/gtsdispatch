@@ -25,8 +25,8 @@ export default function HomePage() {
     <>
       <section className="relative isolate min-h-[34rem] overflow-hidden bg-[#231f20] text-white">
         <Image
-          src="/images/services-banner.jpg"
-          alt="White semi trucks on a mountain highway"
+          src="/images/dry-van.jpg"
+          alt="Dry van semi truck on the highway"
           fill
           priority
           className="object-cover"
@@ -138,8 +138,8 @@ export default function HomePage() {
         </div>
         <div className="relative aspect-[4/3] overflow-hidden rounded-2xl">
           <Image
-            src="/images/fleet-lineup.jpg"
-            alt="A row of colorful semi trucks staged for dispatch"
+            src="/images/reefer.jpg"
+            alt="Blue tractor with reefer trailers"
             fill
             className="object-cover"
           />
@@ -208,20 +208,17 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="bg-gradient-to-b from-[#eef6ff] to-[#f7f3ea] py-16">
+      <section className="bg-[#f4f7fb] py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <h2 className="text-3xl font-semibold">Our services</h2>
           <div className="mt-8 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {homeServices.map((service, index) => (
+            {homeServices.map((service) => (
               <Link
                 key={service.title}
                 href={service.href}
                 className="group overflow-hidden rounded-2xl bg-white shadow-sm ring-1 ring-black/5"
               >
-                <div
-                  className="h-1.5"
-                  style={{ background: ["#0563ad", "#f6c453", "#25D366", "#7c3aed", "#0284c7", "#e11d48", "#0f766e"][index % 7] }}
-                />
+                <div className="h-1.5 bg-[#0563ad]" />
                 <div className="relative aspect-[16/9] bg-[#f4f5f6]">
                   <Image
                     src={service.image}
@@ -261,10 +258,10 @@ export default function HomePage() {
 
       <section className="relative isolate overflow-hidden bg-[#231f20] text-white">
         <Image
-          src="/images/mountain-highway.jpg"
+          src="/images/pexels-pixabay-315938-scaled.jpg"
           alt=""
           fill
-          className="object-cover object-[82%_88%] opacity-40"
+          className="object-cover opacity-40"
         />
         <div className="relative mx-auto max-w-4xl px-4 py-20 text-center sm:px-6">
           <h2 className="text-3xl font-semibold sm:text-4xl">
@@ -387,7 +384,7 @@ export default function HomePage() {
         </ul>
       </section>
 
-      <section className="bg-gradient-to-r from-[#0563ad] to-[#0e9f6e] text-white">
+      <section className="bg-[#0563ad] text-white">
         <div className="mx-auto flex max-w-6xl flex-col items-start justify-between gap-6 px-4 py-14 sm:px-6 md:flex-row md:items-center">
           <div>
             <h2 className="text-3xl font-semibold">Get In Touch</h2>

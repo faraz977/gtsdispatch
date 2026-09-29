@@ -12,7 +12,7 @@ export function ContentPage({ page }: { page: PageDoc }) {
           src={page.image}
           alt=""
           fill
-          className={cn("object-cover opacity-35", page.bannerPosition)}
+          className="object-cover opacity-35"
           priority
         />
         <div className="relative mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">

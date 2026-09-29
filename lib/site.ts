@@ -100,19 +100,19 @@ export const homeServices = [
   {
     title: "Fleet Management",
     href: "/fleet-management",
-    image: "/images/fleet-lineup.jpg",
+    image: "/images/service-1.jpg",
     text: "Our fleet management services ensure efficient vehicle operations by coordinating maintenance, monitoring compliance, and optimizing costs. This service goes beyond basic truck dispatch to support long term operational excellence.",
   },
   {
     title: "Semi Truck Dispatch",
     href: "/semi-truck-dispatch",
-    image: "/images/mountain-highway.jpg",
+    image: "/images/Semi-Truck-Dispatch-Services.jpg",
     text: "Our semi truck dispatch services focus on placing trucks on profitable lanes through smart load sourcing, strong rate negotiation, and consistent dispatch communication.",
   },
   {
     title: "Independent Freight Agents",
     href: "/our-services",
-    image: "/images/services-banner.jpg",
+    image: "/images/service-2.jpg",
     text: "As Independent Freight Agents, we act on behalf of freight brokers by managing carrier coordination, dispatch execution, and operational support through our experienced global team.",
   },
   {

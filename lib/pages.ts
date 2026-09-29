@@ -10,7 +10,6 @@ export type PageDoc = {
   description: string;
   image: string;
   imageAlt: string;
-  bannerPosition?: string;
   blocks: Block[];
 };
 
@@ -109,8 +108,8 @@ export const fleetPage: PageDoc = {
   eyebrow: "Beyond dispatch",
   description:
     "Comprehensive fleet management that covers back-office work, compliance, safety, tracking, and driver pay support.",
-  image: "/images/fleet-lineup.jpg",
-  imageAlt: "A row of colorful semi trucks staged for dispatch",
+  image: "/images/service-1.jpg",
+  imageAlt: "Dry van trailers staged at a warehouse",
   blocks: [
     {
       type: "p",
@@ -162,9 +161,8 @@ export const semiPage: PageDoc = {
   eyebrow: "Structured freight",
   description:
     "Disciplined freight positioning, rate negotiation, and operational coordination for dry van, reefer, flatbed, and power only.",
-  image: "/images/mountain-highway.jpg",
-  imageAlt: "White semi truck hauling a dry van through the mountains",
-  bannerPosition: "object-[82%_88%]",
+  image: "/images/Semi-Truck-Dispatch-Services.jpg",
+  imageAlt: "Blue semi trucks lined up for dispatch",
   blocks: [
     { type: "h2", text: "Structured Semi Truck Dispatch Built for Real Profit" },
     {
@@ -391,9 +389,8 @@ export const howPage: PageDoc = {
   eyebrow: "Realistic freight",
   description:
     "We do not sell dreams. We run freight realistically, with a carrier portal, lane strategy, and clear advice for new and established authorities.",
-  image: "/images/mountain-highway.jpg",
-  imageAlt: "White semi truck hauling a dry van through the mountains",
-  bannerPosition: "object-[82%_88%]",
+  image: "/images/pexels-pixabay-315938-scaled.jpg",
+  imageAlt: "Highway light trails at night",
   blocks: [
     {
       type: "p",

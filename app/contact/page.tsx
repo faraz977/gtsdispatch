@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   return (
     <>
-      <header className="bg-gradient-to-br from-[#043e73] via-[#0563ad] to-[#0e9f6e] text-white">
+      <header className="bg-[#0563ad] text-white">
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <p className="text-sm font-semibold tracking-[0.16em] text-sky-100 uppercase">Hello</p>
           <h1 className="mt-2 text-4xl font-semibold sm:text-5xl">Contact Us</h1>

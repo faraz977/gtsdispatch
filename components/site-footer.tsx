@@ -5,7 +5,7 @@ import { company, serviceLinks, socials } from "@/lib/site";
 export function SiteFooter() {
   return (
     <footer className="bg-[#1b2430] text-white">
-      <div className="h-1.5 bg-gradient-to-r from-[#0563ad] via-[#25D366] to-[#f6c453]" />
+      <div className="h-1.5 bg-[#0563ad]" />
       <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:px-6 md:grid-cols-2 lg:grid-cols-4">
         <div>
           <Image
