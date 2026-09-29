@@ -265,7 +265,7 @@ export default function HomePage() {
           src="/images/mountain-highway.jpg"
           alt=""
           fill
-          className="object-cover opacity-40"
+          className="object-cover object-[82%_88%] opacity-40"
         />
         <div className="relative mx-auto max-w-4xl px-4 py-20 text-center sm:px-6">
           <h2 className="text-3xl font-semibold sm:text-4xl">

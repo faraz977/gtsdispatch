@@ -10,6 +10,7 @@ export type PageDoc = {
   description: string;
   image: string;
   imageAlt: string;
+  bannerPosition?: string;
   blocks: Block[];
 };
 
@@ -163,6 +164,7 @@ export const semiPage: PageDoc = {
     "Disciplined freight positioning, rate negotiation, and operational coordination for dry van, reefer, flatbed, and power only.",
   image: "/images/mountain-highway.jpg",
   imageAlt: "White semi truck hauling a dry van through the mountains",
+  bannerPosition: "object-[82%_88%]",
   blocks: [
     { type: "h2", text: "Structured Semi Truck Dispatch Built for Real Profit" },
     {
@@ -391,6 +393,7 @@ export const howPage: PageDoc = {
     "We do not sell dreams. We run freight realistically, with a carrier portal, lane strategy, and clear advice for new and established authorities.",
   image: "/images/mountain-highway.jpg",
   imageAlt: "White semi truck hauling a dry van through the mountains",
+  bannerPosition: "object-[82%_88%]",
   blocks: [
     {
       type: "p",
