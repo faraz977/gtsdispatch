@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { Suspense, useState, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
@@ -13,7 +14,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { company, equipmentTypes, states } from "@/lib/site";
+import { equipmentTypes, states } from "@/lib/site";
 
 const fieldClass = "h-10 bg-white";
 
@@ -62,49 +63,73 @@ function Choice({
   );
 }
 
-export function ContactForm() {
-  const [sent, setSent] = useState(false);
-  const [error, setError] = useState("");
+const FORM_ENDPOINT = "https://formsubmit.co/Support@GTSDispatch.us";
 
+function SentNotice({ className, children }: { className: string; children: string }) {
+  const params = useSearchParams();
+  if (params.get("sent") !== "1") return null;
+  return (
+    <p className={className} role="status">
+      {children}
+    </p>
+  );
+}
+
+function setReturnUrl(form: HTMLFormElement, path: string) {
+  const next = form.elements.namedItem("_next");
+  if (next instanceof HTMLInputElement) {
+    next.value = `${window.location.origin}${path}?sent=1`;
+  }
+}
+
+export function ContactForm() {
+  const [error, setError] = useState("");
+  const [pending, setPending] = useState(false);
   function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+    setReturnUrl(event.currentTarget, "/contact");
     const data = new FormData(event.currentTarget);
-    const required = ["first", "last", "company", "mc", "email", "phone"];
+    const required = ["First name", "Last name", "Company", "MC #", "email", "Phone"] as const;
     const missing = required.some((key) => !String(data.get(key) || "").trim());
     if (missing || !String(data.get("email")).includes("@")) {
+      event.preventDefault();
       setError("Please complete the required fields with a valid email.");
-      setSent(false);
+      setPending(false);
       return;
     }
     setError("");
-    setSent(true);
-    event.currentTarget.reset();
+    setPending(true);
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-4 rounded-2xl border bg-white p-5 shadow-sm sm:p-6" noValidate>
+    <form
+      action={FORM_ENDPOINT}
+      method="POST"
+      onSubmit={onSubmit}
+      className="space-y-4 rounded-2xl border bg-white p-5 shadow-sm sm:p-6"
+      noValidate
+    >
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
           <RequiredLabel>First name</RequiredLabel>
-          <Input name="first" className={fieldClass} autoComplete="given-name" />
+          <Input name="First name" className={fieldClass} autoComplete="given-name" />
         </div>
         <div className="space-y-1.5">
           <RequiredLabel>Last name</RequiredLabel>
-          <Input name="last" className={fieldClass} autoComplete="family-name" />
+          <Input name="Last name" className={fieldClass} autoComplete="family-name" />
         </div>
       </div>
       <div className="space-y-1.5">
         <RequiredLabel>Company name</RequiredLabel>
-        <Input name="company" className={fieldClass} autoComplete="organization" />
+        <Input name="Company" className={fieldClass} autoComplete="organization" />
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
           <RequiredLabel>MC #</RequiredLabel>
-          <Input name="mc" className={fieldClass} />
+          <Input name="MC #" className={fieldClass} />
         </div>
         <div className="space-y-1.5">
           <Label>Number of trucks</Label>
-          <Input name="trucks" type="number" min={1} className={fieldClass} />
+          <Input name="Trucks" type="number" min={1} className={fieldClass} />
         </div>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
@@ -114,63 +139,66 @@ export function ContactForm() {
         </div>
         <div className="space-y-1.5">
           <RequiredLabel>Phone</RequiredLabel>
-          <Input name="phone" type="tel" className={fieldClass} autoComplete="tel" />
+          <Input name="Phone" type="tel" className={fieldClass} autoComplete="tel" />
         </div>
       </div>
       <div className="space-y-1.5">
         <Label>Message</Label>
-        <Textarea name="message" className="min-h-28 bg-white" />
+        <Textarea name="Message" className="min-h-28 bg-white" />
       </div>
       {error ? (
         <p className="text-sm text-red-700" role="alert">
           {error}
         </p>
       ) : null}
-      {sent ? (
-        <p className="rounded-lg bg-[#e8f1f8] px-3 py-2 text-sm text-[#0563ad]" role="status">
-          Thanks. Your note is recorded in this browser session. Call {company.phoneDisplay} or
-          email {company.email} if you need a dispatcher today — this form does not send email
-          on its own.
-        </p>
-      ) : null}
-      <Button type="submit" className="h-10 px-5">
-        Send message
+      <Suspense fallback={null}>
+        <SentNotice className="rounded-lg bg-[#e8f1f8] px-3 py-2 text-sm text-[#0563ad]">
+          Message sent. The dispatch desk will follow up at the email or phone you provided.
+        </SentNotice>
+      </Suspense>
+      <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+      <input type="hidden" name="_subject" value="New contact from gtsdispatch.us" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_next" value="https://gtsdispatch.us/contact?sent=1" />
+      <Button type="submit" className="h-10 px-5" disabled={pending}>
+        {pending ? "Sending…" : "Send message"}
       </Button>
     </form>
   );
 }
 
-export function PostTruckForm() {
-  const [sent, setSent] = useState(false);
+export function PostTruckForm({ returnPath = "/" }: { returnPath?: string }) {
   const [error, setError] = useState("");
+  const [pending, setPending] = useState(false);
   const [originState, setOriginState] = useState("");
   const [destState, setDestState] = useState("");
   const [equipment, setEquipment] = useState("");
   const [agreed, setAgreed] = useState(false);
-
   function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+    setReturnUrl(event.currentTarget, returnPath);
     const data = new FormData(event.currentTarget);
-    const origin = String(data.get("origin") || "").trim();
-    const date = String(data.get("date") || "").trim();
-    const mc = String(data.get("mc") || "").trim();
-    const phone = String(data.get("phone") || "").trim();
+    const origin = String(data.get("Origin city") || "").trim();
+    const date = String(data.get("Date") || "").trim();
+    const mc = String(data.get("MC number") || "").trim();
+    const phone = String(data.get("Phone") || "").trim();
     const email = String(data.get("email") || "").trim();
     if (!origin || !originState || !date || !equipment || !mc || !phone || !email.includes("@") || !agreed) {
+      event.preventDefault();
+      setPending(false);
       setError("Origin, state, date, equipment, MC, phone, email, and the fee acknowledgment are required.");
-      setSent(false);
       return;
     }
     setError("");
-    setSent(true);
+    setPending(true);
   }
 
   return (
-    <form onSubmit={onSubmit} className="space-y-5" noValidate>
+    <form action={FORM_ENDPOINT} method="POST" onSubmit={onSubmit} className="space-y-5" noValidate>
       <div className="grid gap-4 sm:grid-cols-3">
         <div className="space-y-1.5">
           <RequiredLabel>Origin (City)</RequiredLabel>
-          <Input name="origin" placeholder="City" className={fieldClass} />
+          <Input name="Origin city" placeholder="City" className={fieldClass} />
         </div>
         <Choice
           label="State"
@@ -182,7 +210,7 @@ export function PostTruckForm() {
         />
         <div className="space-y-1.5">
           <RequiredLabel>Date</RequiredLabel>
-          <Input name="date" type="date" className={fieldClass} />
+          <Input name="Date" type="date" className={fieldClass} />
         </div>
       </div>
       <div className="grid gap-4 sm:grid-cols-3">
@@ -196,17 +224,17 @@ export function PostTruckForm() {
         />
         <div className="space-y-1.5">
           <Label>Length (ft)</Label>
-          <Input name="length" type="number" min={1} className={fieldClass} />
+          <Input name="Length (ft)" type="number" min={1} className={fieldClass} />
         </div>
         <div className="space-y-1.5">
           <Label>Weight (lbs)</Label>
-          <Input name="weight" type="number" min={1} className={fieldClass} />
+          <Input name="Weight (lbs)" type="number" min={1} className={fieldClass} />
         </div>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
           <Label>Destination (City)</Label>
-          <Input name="destination" placeholder="Preferred Destination City" className={fieldClass} />
+          <Input name="Destination city" placeholder="Preferred Destination City" className={fieldClass} />
         </div>
         <Choice
           label="State"
@@ -219,11 +247,11 @@ export function PostTruckForm() {
       <div className="grid gap-4 sm:grid-cols-3">
         <div className="space-y-1.5">
           <RequiredLabel>MC Number</RequiredLabel>
-          <Input name="mc" type="number" placeholder="Enter Your MC Number" className={fieldClass} />
+          <Input name="MC number" type="number" placeholder="Enter Your MC Number" className={fieldClass} />
         </div>
         <div className="space-y-1.5">
           <RequiredLabel>Phone</RequiredLabel>
-          <Input name="phone" type="tel" placeholder="Enter Your Phone Number" className={fieldClass} />
+          <Input name="Phone" type="tel" placeholder="Enter Your Phone Number" className={fieldClass} />
         </div>
         <div className="space-y-1.5">
           <RequiredLabel>Email</RequiredLabel>
@@ -247,15 +275,22 @@ export function PostTruckForm() {
           {error}
         </p>
       ) : null}
-      {sent ? (
-        <p className="rounded-lg bg-white/15 px-3 py-2 text-sm" role="status">
-          Truck posted in this session. A live dispatcher still needs your call at{" "}
-          {company.phoneDisplay} or an email to {company.email}. This page does not transmit
-          the form to GTS automatically.
-        </p>
-      ) : null}
-      <Button type="submit" variant="secondary" className="h-10 bg-white px-5 text-[#0563ad] hover:bg-white/90">
-        Load Offers
+      <Suspense fallback={null}>
+        <SentNotice className="rounded-lg bg-white px-3 py-2 text-sm text-[#0563ad]">
+          Truck posted. Dispatch will follow up at the phone or email you entered.
+        </SentNotice>
+      </Suspense>
+      <input type="hidden" name="Origin state" value={originState} />
+      <input type="hidden" name="Destination state" value={destState} />
+      <input type="hidden" name="Equipment" value={equipment} />
+      <input type="hidden" name="Fee acknowledgment" value={agreed ? "Agreed to 4% of gross" : ""} />
+      <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+      <input type="hidden" name="_subject" value="Post your truck from gtsdispatch.us" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_next" value={`https://gtsdispatch.us${returnPath}?sent=1`} />
+      <Button type="submit" variant="secondary" className="h-10 bg-white px-5 text-[#0563ad] hover:bg-white/90" disabled={pending}>
+        {pending ? "Sending…" : "Load Offers"}
       </Button>
     </form>
   );
