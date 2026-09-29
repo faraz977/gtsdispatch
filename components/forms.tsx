@@ -82,22 +82,40 @@ function setReturnUrl(form: HTMLFormElement, path: string) {
   }
 }
 
+function formOf(event: { currentTarget: EventTarget | null; target: EventTarget | null }) {
+  if (event.target instanceof HTMLFormElement) return event.target;
+  if (event.currentTarget instanceof HTMLFormElement) return event.currentTarget;
+  if (event.currentTarget instanceof HTMLButtonElement) return event.currentTarget.form;
+  return null;
+}
+
+const CONTACT_ERROR = "Please complete the required fields with a valid email.";
+
+function contactProblem(form: HTMLFormElement) {
+  const data = new FormData(form);
+  const required = ["First name", "Last name", "Company", "MC #", "email", "Phone"] as const;
+  const missing = required.some((key) => !String(data.get(key) || "").trim());
+  if (missing || !String(data.get("email")).includes("@")) return CONTACT_ERROR;
+  return "";
+}
+
 export function ContactForm() {
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
   function onSubmit(event: FormEvent<HTMLFormElement>) {
-    setReturnUrl(event.currentTarget, "/contact");
-    const data = new FormData(event.currentTarget);
-    const required = ["First name", "Last name", "Company", "MC #", "email", "Phone"] as const;
-    const missing = required.some((key) => !String(data.get(key) || "").trim());
-    if (missing || !String(data.get("email")).includes("@")) {
-      event.preventDefault();
-      setError("Please complete the required fields with a valid email.");
+    event.preventDefault();
+    const form = formOf(event);
+    if (!form) return;
+    const problem = contactProblem(form);
+    if (problem) {
+      setError(problem);
       setPending(false);
       return;
     }
     setError("");
     setPending(true);
+    setReturnUrl(form, "/contact");
+    form.submit();
   }
 
   return (
@@ -106,26 +124,25 @@ export function ContactForm() {
       method="POST"
       onSubmit={onSubmit}
       className="space-y-4 rounded-2xl border bg-white p-5 shadow-sm sm:p-6"
-      noValidate
     >
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
           <RequiredLabel>First name</RequiredLabel>
-          <Input name="First name" className={fieldClass} autoComplete="given-name" />
+          <Input name="First name" required className={fieldClass} autoComplete="given-name" />
         </div>
         <div className="space-y-1.5">
           <RequiredLabel>Last name</RequiredLabel>
-          <Input name="Last name" className={fieldClass} autoComplete="family-name" />
+          <Input name="Last name" required className={fieldClass} autoComplete="family-name" />
         </div>
       </div>
       <div className="space-y-1.5">
         <RequiredLabel>Company name</RequiredLabel>
-        <Input name="Company" className={fieldClass} autoComplete="organization" />
+        <Input name="Company" required className={fieldClass} autoComplete="organization" />
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
           <RequiredLabel>MC #</RequiredLabel>
-          <Input name="MC #" className={fieldClass} />
+          <Input name="MC #" required className={fieldClass} />
         </div>
         <div className="space-y-1.5">
           <Label>Number of trucks</Label>
@@ -135,11 +152,11 @@ export function ContactForm() {
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
           <RequiredLabel>Email</RequiredLabel>
-          <Input name="email" type="email" className={fieldClass} autoComplete="email" />
+          <Input name="email" type="email" required className={fieldClass} autoComplete="email" />
         </div>
         <div className="space-y-1.5">
           <RequiredLabel>Phone</RequiredLabel>
-          <Input name="Phone" type="tel" className={fieldClass} autoComplete="tel" />
+          <Input name="Phone" type="tel" required className={fieldClass} autoComplete="tel" />
         </div>
       </div>
       <div className="space-y-1.5">
@@ -161,7 +178,20 @@ export function ContactForm() {
       <input type="hidden" name="_template" value="table" />
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_next" value="https://gtsdispatch.us/contact?sent=1" />
-      <Button type="submit" className="h-10 px-5" disabled={pending}>
+      <Button
+        type="submit"
+        className="h-10 px-5"
+        disabled={pending}
+        onClick={(event) => {
+          const form = formOf(event);
+          if (!form) return;
+          const problem = contactProblem(form);
+          if (!problem) return;
+          event.preventDefault();
+          setError(problem);
+          setPending(false);
+        }}
+      >
         {pending ? "Sending…" : "Send message"}
       </Button>
     </form>
@@ -176,29 +206,31 @@ export function PostTruckForm({ returnPath = "/" }: { returnPath?: string }) {
   const [equipment, setEquipment] = useState("");
   const [agreed, setAgreed] = useState(false);
   function onSubmit(event: FormEvent<HTMLFormElement>) {
-    setReturnUrl(event.currentTarget, returnPath);
-    const data = new FormData(event.currentTarget);
+    event.preventDefault();
+    const form = event.target instanceof HTMLFormElement ? event.target : event.currentTarget;
+    const data = new FormData(form);
     const origin = String(data.get("Origin city") || "").trim();
     const date = String(data.get("Date") || "").trim();
     const mc = String(data.get("MC number") || "").trim();
     const phone = String(data.get("Phone") || "").trim();
     const email = String(data.get("email") || "").trim();
     if (!origin || !originState || !date || !equipment || !mc || !phone || !email.includes("@") || !agreed) {
-      event.preventDefault();
       setPending(false);
       setError("Origin, state, date, equipment, MC, phone, email, and the fee acknowledgment are required.");
       return;
     }
     setError("");
     setPending(true);
+    setReturnUrl(form, returnPath);
+    form.submit();
   }
 
   return (
-    <form action={FORM_ENDPOINT} method="POST" onSubmit={onSubmit} className="space-y-5" noValidate>
+    <form action={FORM_ENDPOINT} method="POST" onSubmit={onSubmit} className="space-y-5">
       <div className="grid gap-4 sm:grid-cols-3">
         <div className="space-y-1.5">
           <RequiredLabel>Origin (City)</RequiredLabel>
-          <Input name="Origin city" placeholder="City" className={fieldClass} />
+          <Input name="Origin city" required placeholder="City" className={fieldClass} />
         </div>
         <Choice
           label="State"
@@ -210,7 +242,7 @@ export function PostTruckForm({ returnPath = "/" }: { returnPath?: string }) {
         />
         <div className="space-y-1.5">
           <RequiredLabel>Date</RequiredLabel>
-          <Input name="Date" type="date" className={fieldClass} />
+          <Input name="Date" type="date" required className={fieldClass} />
         </div>
       </div>
       <div className="grid gap-4 sm:grid-cols-3">
@@ -247,15 +279,15 @@ export function PostTruckForm({ returnPath = "/" }: { returnPath?: string }) {
       <div className="grid gap-4 sm:grid-cols-3">
         <div className="space-y-1.5">
           <RequiredLabel>MC Number</RequiredLabel>
-          <Input name="MC number" type="number" placeholder="Enter Your MC Number" className={fieldClass} />
+          <Input name="MC number" type="number" required placeholder="Enter Your MC Number" className={fieldClass} />
         </div>
         <div className="space-y-1.5">
           <RequiredLabel>Phone</RequiredLabel>
-          <Input name="Phone" type="tel" placeholder="Enter Your Phone Number" className={fieldClass} />
+          <Input name="Phone" type="tel" required placeholder="Enter Your Phone Number" className={fieldClass} />
         </div>
         <div className="space-y-1.5">
           <RequiredLabel>Email</RequiredLabel>
-          <Input name="email" type="email" placeholder="Enter Your Email Address" className={fieldClass} />
+          <Input name="email" type="email" required placeholder="Enter Your Email Address" className={fieldClass} />
         </div>
       </div>
       <label className="flex items-start gap-3 text-sm leading-6 text-[#3a3d40]">
