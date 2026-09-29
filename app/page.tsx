@@ -46,6 +46,9 @@ export default function HomePage() {
             <Link href="/post-your-truck" className={cn(buttonVariants(), "h-11 bg-white px-5 text-[#0563ad] hover:bg-white/90")}>
               Post Your Truck
             </Link>
+            <Link href="/videos" className={cn(buttonVariants({ variant: "outline" }), "h-11 border-white/40 bg-transparent px-5 text-white hover:bg-white/10")}>
+              YouTube reviews
+            </Link>
             <Link href="/our-services" className={cn(buttonVariants({ variant: "outline" }), "h-11 border-white/40 bg-transparent px-5 text-white hover:bg-white/10")}>
               Our Services
             </Link>
@@ -65,6 +68,17 @@ export default function HomePage() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section id="videos" className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+        <p className="text-sm font-semibold tracking-[0.16em] text-[#0563ad] uppercase">YouTube</p>
+        <h2 className="mt-2 text-3xl font-semibold">Client review videos</h2>
+        <p className="mt-3 max-w-2xl leading-7 text-[#3a3d40]">
+          These two reviews are from the GTS Truck Dispatch YouTube channel.
+        </p>
+        <div className="mt-8">
+          <ClientVideos />
+        </div>
       </section>
 
       <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">

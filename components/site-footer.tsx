@@ -60,6 +60,11 @@ export function SiteFooter() {
               </Link>
             </li>
             <li>
+              <Link className="hover:text-white" href="/videos">
+                Videos
+              </Link>
+            </li>
+            <li>
               <Link className="hover:text-white" href="/blog">
                 Blog
               </Link>
