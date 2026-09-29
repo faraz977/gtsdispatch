@@ -18,7 +18,7 @@ export default function PostTruckPage() {
           Loads booked through GTS Dispatch carry a 4% fee on the gross.
         </p>
         <div className="mt-8 rounded-2xl border bg-white p-5 text-[#231f20] sm:p-8">
-          <PostTruckForm returnPath="/post-your-truck" />
+          <PostTruckForm />
         </div>
       </div>
     </div>
