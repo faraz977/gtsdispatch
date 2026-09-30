@@ -23,7 +23,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b border-black/5 bg-white/95 backdrop-blur">
       <div className="bg-gradient-to-r from-[#043e73] via-[#0563ad] to-[#1280d4] text-white">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-2 text-xs sm:text-sm">
-          <p>Driver support 24/7 · Remote dispatch across the U.S.</p>
+          <p>24/7 Driver Support · Professional Dispatch Nationwide</p>
           <div className="flex items-center gap-3">
             <a className="inline-flex items-center gap-1.5 font-medium hover:underline" href={company.phoneHref}>
               <Phone className="size-3.5" />
